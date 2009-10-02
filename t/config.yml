@@ -1,0 +1,34 @@
+---
+ID: toshiba
+file_list:
+  - c:\Documents and Settings\Owner\Desktop\backup.txt
+  - c:\Documents and Settings\Owner\Application data\X-Chat 2\*.conf
+  - c:\Program Files\Vim\vim72\plugin\NERD_tree.vim
+  - c:\Program Files\Vim\vim72\plugin\NERD_commenter.vim
+  - c:\Program Files\Vim\vim72\plugin\matchit.vim
+  - c:\Program Files\Vim\vim72\doc\NERD_tree.txt
+  - c:\Program Files\Vim\vim72\doc\NERD_commenter.txt
+  - c:\Program Files\Vim\vim72\doc\matchit.txt
+  - c:\Program Files\Vim\_vimrc#vimrc
+  - c:\Program Files\Vim\vim72\colors\darkspectrum.vim
+  - c:\Program Files\Vim\vim72\colors\ir_black.vim
+  - c:\Documents and Settings\Owner\My Documents\perl_gui_email_backup_project.vim
+  - c:\Documents and Settings\Owner\My Documents\work.vim
+  - c:\Documents and Settings\Owner\application data\Opera\Opera\profile\sessions
+  - c:\Documents and Settings\Owner\application data\Opera\Opera\profile\keyboard
+  - c:\Documents and Settings\Owner\application data\Opera\Opera\profile\speeddial.ini
+  - c:\Documents and Settings\Owner\application data\Opera\Opera\profile\cookies4.dat
+  - c:\Documents and Settings\Owner\application data\Opera\Opera\profile\speeddial.ini
+  - c:\documents and settings\owner\application data\winscp.rnd
+  - c:\Documents and Settings\Owner\.NERDTreeBookmarks
+hash_with_arrays:
+  - item1
+  - item2
+  - item3
+imap: imap.gmail.com
+just_a_hash:
+  first_key: stuff
+  second_key: other_stuff
+last_message_read: 2600
+smtp: smtp.gmail.com
+username: stefan.petrea

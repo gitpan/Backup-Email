@@ -1,0 +1,37 @@
+--- #YAML:1.0
+name:               Backup-Email
+version:            0.01
+abstract:           An e-mail client specifially built for backing up files on an IMAP e-mail.
+author:
+    - Stefan Petrea <stefan.petrea@gmail.com>
+license:            unknown
+distribution_type:  module
+configure_requires:
+    ExtUtils::MakeMaker:  0
+build_requires:
+    ExtUtils::MakeMaker:  0
+requires:
+    Alien::wxWidgets:  0
+    DateTime:          0
+    DBM::Deep:         0
+    IO::Socket::SSL:   0
+    List::AllUtils:    0
+    List::MoreUtils:   0
+    List::Util:        0
+    Mail::IMAPClient:  0
+    MIME::Base64:      0
+    MIME::Lite:        0
+    Moose:             0
+    MooseX::NonMoose:  0
+    Net::SMTP::TLS:    0
+    Net::SSLeay:       0
+    Wx:                0
+    YAML:              0
+no_index:
+    directory:
+        - t
+        - inc
+generated_by:       ExtUtils::MakeMaker version 6.54
+meta-spec:
+    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
+    version:  1.4
