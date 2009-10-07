@@ -35,7 +35,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.015';
 
 
 
@@ -44,7 +44,7 @@ our $VERSION = '0.01';
 
 =head1 NAME
 
-Backup::Email - An e-mail client specifially built for backing up files on an IMAP e-mail.
+Backup::Email - A backup application specifically built for backing up files to an IMAP server.
 
 =head1 DESCRIPTION
 
@@ -57,6 +57,7 @@ It inherits Backup::Email::Config so it can access easily the config.yml that yo
 
 It caches some e-mail headers in messages.db using DBM::Deep so it will run faster on sub-sequent runs.
 
+
 =head1 SYNOPSIS
 
 =over 
@@ -64,7 +65,7 @@ It caches some e-mail headers in messages.db using DBM::Deep so it will run fast
 =item config.yml file 
 
     The configuration file needs to specify the credentials of the e-mail and a list of files to back up.
-    Your config file should be named 'config.yml' and placed in your home directory.
+    Your config file should be named 'config.yml' and placed in your appdir directory.
 
         ---
         ID: toshiba
@@ -74,12 +75,15 @@ It caches some e-mail headers in messages.db using DBM::Deep so it will run fast
           - /home/user/.opera/
         imap: imap.gmail.com
         smtp: smtp.gmail.com
+        appdir: /path/to/where/config.yml/is
         from: <from-email>
         to: <to-email>
         password: <your_password>
         username: <your_username>
 
 =back
+
+
 
 =head1 client
 
@@ -245,6 +249,7 @@ sub getMessageFile {
             # and after that docode and store on disk
             # probably will need unlink, rename, File::Copy for various operations with the files
             print $config_archive $self->client->bodypart_string($uid,2);
+            #TODO -> try on windows to use  binmode FILEHANDLE nad this should fix it and eliminate the need for base64.exe
             system "base64 -d -n config.base64 > config.zip"; # this is not needed on Linux , where base64 from MIME::Base64 works properly
         } elsif ( $^O =~ /linux/ ) {
             say "I'm on linux";
@@ -260,7 +265,7 @@ sub files_to_zip {
 	my $self = shift;
         confess "[ERROR] no files to zip in configuration file" unless $self->file_list;
 	my @return = @{$self->file_list};
-	push @return,'../config.yml';
+	push @return,$self->appdir.'/config.yml';
 	return @return;
 }
 
@@ -274,6 +279,10 @@ The Backip::Email comes with a GUI which you can use by running using app.pl
 <img src="http://perlhobby.googlecode.com/svn/trunk/scripturi_perl_teste/backup_pl/GUI.png" />
 
 =end html
+
+=head1 NOTES
+
+Normally you would use some version control for backing things up like this but I decided to write the module anyway.
 
 =head1 BUGS
 

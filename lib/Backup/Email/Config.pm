@@ -159,9 +159,9 @@ has temp_change => ( # if change is part of the chain last_config_item needs to 
 sub BUILDARGS {
 	my ($self,$file) = @_;
 	confess
-	'config parameter invalid and default config.yml path invalid' if !defined($file) && !(-e '../config.yml');
+	'config parameter invalid and default config.yml path invalid' if !defined($file) && !(-e $self->appdir.'/config.yml');
 	{
-		_config_path	=> $file// '../config.yml' 
+		_config_path	=> $file// $self->appdir.'/config.yml' 
 	};
 };
 

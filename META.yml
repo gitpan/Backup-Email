@@ -1,7 +1,7 @@
 --- #YAML:1.0
 name:               Backup-Email
-version:            0.01
-abstract:           An e-mail client specifially built for backing up files on an IMAP e-mail.
+version:            0.015
+abstract:           A backup application specifically built for backing up files to an IMAP server.
 author:
     - Stefan Petrea <stefan.petrea@gmail.com>
 license:            unknown
@@ -12,6 +12,7 @@ build_requires:
     ExtUtils::MakeMaker:  0
 requires:
     Alien::wxWidgets:  0
+    Archive::Zip:      0
     DateTime:          0
     DBM::Deep:         0
     IO::Socket::SSL:   0

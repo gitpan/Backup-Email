@@ -1,6 +1,12 @@
 Revision history for Perl extension Backup::Email.
 
+
+0.015  Wed Oct  7 18:29:00 2009
+        - added support in Backup::Email::Send role for attaching multiple files to an email
+        - changed all hardcoded paths to appdir path taken from config.yml as documented in Backup::Email
+        - fixed some typos
+               
 0.01  Fri Oct  2 15:50:29 2009
-	- original version; created by h2xs 1.23 with options
-		-XA -n Backup::Email
+        - original version; created by h2xs 1.23 with options
+                -XA -n Backup::Email
 

@@ -6,6 +6,7 @@ WriteMakefile(
     NAME              => 'Backup::Email',
     VERSION_FROM      => 'lib/Backup/Email.pm', # finds $VERSION
     PREREQ_PM         => {
+        'Archive::Zip'      => 0,
         'Alien::wxWidgets'  => 0,
         'Wx'                => 0,
         'DateTime'          => 0,

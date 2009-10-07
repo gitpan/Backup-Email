@@ -4,6 +4,7 @@ use Carp qw/confess/;
 use MIME::Lite;
 use List::AllUtils qw/all/;
 use Net::SMTP::TLS;
+use Data::Dumper;
 =pod
 
 =head1 NAME
@@ -53,6 +54,13 @@ Stefan Petrea, C<< <stefan.petrea at gmail.com> >>
 #
 
 
+has attachments => (
+    isa => 'ArrayRef[Str]',
+    is  => 'rw',
+    default => sub {[]},
+);
+
+
 sub BUILD {
     my $self = shift;
     confess qq/
@@ -69,19 +77,36 @@ sub BUILD {
 };
 
 
+
+
+sub attachFile {
+	my ($self,$path) = @_;
+        confess "file $path to be attached does not exist" unless -f $path;
+        push @{$self->attachments},$path;
+}
+
 sub sendEmail {
 	my ($self,$href) = @_;
+
 	my $msg = MIME::Lite->new(
 		From	=> "".$self->to,
 		To	=> "".$self->from,
 		Subject	=> $href->{subject},
-		Type	=> 'application/octet-stream',
-		Path	=> $href->{file},
+                Type    => 'TEXT',
+                Data    => $href->{body},
 	);
-        $msg->attach(
-            Type    => 'TEXT',
-            Data    => $href->{body},
-        );
+
+
+        warn "no file attachments" unless @{$self->attachments};
+
+        -f $_
+        ?   $msg->attach(
+		Type	=> 'application/octet-stream',
+		Path	=> $_,
+            )
+        : warn "file $_ does not exist"
+            for @{$self->attachments};
+
 	my $smtp_tls =  MIME::Lite::SMTP::TLS->new(
 		"".$self->smtp,
 		User		=> "".$self->username,
@@ -92,9 +117,13 @@ sub sendEmail {
 	$smtp_tls->mail("".$self->from);
 	$smtp_tls->to("".$self->to);
 
+        print Dumper $msg;
 	$smtp_tls->data();
 	$msg->print_for_smtp($smtp_tls);
 	$smtp_tls->dataend();
+        # here need to check if e-mail has been sent, otherwise throw exception
+
+        $self->attachments([]);#erase all attachments if email has been sent succesfuly
 }
 
 

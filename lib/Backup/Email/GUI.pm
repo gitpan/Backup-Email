@@ -123,11 +123,12 @@ sub RESTORE {
 	my $selected = $self->GetSelectedItem;
 	if( defined $selected ) {
             # Cwd::abs_path, File::Spec->rel2abs , portable way  to turn relative -> absolute path 
-            my $where_to_extract = '/home/spx2/backup_pl/unpacked/';
+            my $where_to_extract = $self->backup->appdir.'/backup_pl/unpacked/';
             `mkdir $where_to_extract`;
             `rm $where_to_extract/*`;
             my $uid = $self->list->GetItem($selected,0)->GetText;
             my $raw_data = $self->backup->getMessageFile($uid);
+            # this path should also be relative to the application path $self->appdir (we leave it like that testing purposes)
             my $archive = Archive::Zip->new('config.zip');
             $archive->extractTree('',$where_to_extract);
 	} else {
@@ -142,10 +143,11 @@ sub BACKUP {
         `rm $zipfile`;
         say Dumper $self->backup->files_to_zip();
         $self->backup->make_zip($zipfile);
+
+        $self->backup->attachFile($zipfile);
         $self->backup->sendEmail({
                 subject => 
                     'backup '.$self->backup->ID.' '.DateTime->now.' OS='.$^O.' [configuration]' ,
-                file    => $zipfile,
                 body    => join("\n",$self->backup->files_to_zip()),
         });
 	say "BACKUP pressed";
