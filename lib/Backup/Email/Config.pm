@@ -1,5 +1,6 @@
 package Backup::Email::Config;
 #this package will be used to refactor the use of the configuration file
+#use Want;
 use Moose;
 use strict;
 use warnings;
@@ -18,6 +19,10 @@ our $AUTOLOAD;
 =head1 NAME
 
 Backup::Email::Config - A module that maps naturally keys a YAML file over method names
+
+=head1 VERSION
+
+version 0.02
 
 =head1 DESCRIPTION
 
@@ -104,6 +109,14 @@ We list the following calls:
 
 =end html
 
+=head1 g()
+
+Takes as arguments a set of strings/numbers to indicate keys/indexes to the configuration data.
+Example
+            $config->g qw/object 1/
+
+This should return the string 'qp' for the above config file.
+
 =head1 HOW IT WORKS
 
 We're using AUTOLOAD to catch undefined method calls , and we strip them off of their namespace, and we push them in an array(chain).
@@ -120,7 +133,12 @@ but we just called $c->one->two->three which is pretty natural.
 
 =head1 TODO
 
-We need to have in AUTOLOAD wantarray to check out if on the other side we want an array in order to return one.
+If we have the chain $o->m1->m2->m3->m4;
+Is there any way Want.pm can be used to distinguish the call that is inside a chain(i.e. m1,m2,m3) and the one at the end of the
+chain(m4) ?
+This would allow to avoid tricks like ''.$config->m1->m2
+
+
 
 =cut
 
@@ -194,19 +212,30 @@ sub AUTOLOAD {
 	# should verify that AUTOLOAD starts with Backup::Email::Config , otherwise return to 'normal' flow
 	$AUTOLOAD =~ s/^.*::(\w*)$/$1/; # actually , we don't need the rest
 	push @{$self->chain()} , [ $1 , $index ];
-	return $self;
+        if(wantarray()){
+            #say 'LIST';
+             my $ref = $self->arrayify;
+             my @res = eval { @{$ref} };
+             if($@) { @res = %{$ref} };
+             return @res;
+        };
+#        if(want(qw/LVALUE SCALAR/)){
+#            #say 'SCALAR';
+#            rreturn "$self";
+#        };
+
+        return $self;
 };
 
 sub arrayify {
-	my ($self) = @_;
-	#say "DEBUG: ARRAYIFY is CALLED!";
-	# actually dereferencing an array ref but WTH
-	
-	# this is for this particular case   my @stuff = <Backup::Email::Config>->m1->m2->m3;
-	# it will call arraify because Backup::Email::Config is a blessed hash that needs to be
-	# dereferenced in order to be converted to an array , however we overload this
-	 # let stringify take care of cleaning stuff up also
-	return $self->stringify();
+    my ($self) = @_;
+    #say "DEBUG: ARRAYIFY is CALLED!";
+    
+    # this is for this particular case   my @stuff = <Backup::Email::Config>->m1->m2->m3;
+    # it will call arraify because Backup::Email::Config is a blessed hash that needs to be
+    # dereferenced in order to be converted to an array , however we overload this
+    # let stringify take care of cleaning stuff up also
+    return $self->stringify;
 }
 
 
@@ -254,6 +283,21 @@ sub change { # append this to the end of the chain to modify and save the conf f
 }
 
 
+sub g {
+    my $self = shift;
+    my $return = $self->_config;
+    for my $arg (@_) {
+        for(ref($return)){
+            /HASH/  and $return = $return->{$arg} and next;
+            /ARRAY/ and $arg=~/^\d+$/ and $return = $return->[$arg]
+                or confess __PACKAGE__.": argument error in g() , expected numeric and got [$arg]";
+            #confess "wrong arguments to g() [$@]" if $@;
+        }
+    };
+    return $return;
+}
+
+
 
 =head1 SEE ALSO
 
@@ -275,4 +319,4 @@ Stefan Petrea, C<< <stefan.petrea at gmail.com> >>
 =cut
 
 1;
-
+

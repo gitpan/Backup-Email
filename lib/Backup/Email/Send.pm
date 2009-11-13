@@ -11,6 +11,10 @@ use Data::Dumper;
 
 Backup::Email::Send - A role for sending e-mails.
 
+=head1 VERSION
+
+version 0.02
+
 =head1 DESCRIPTION
 
 This role will provide sending e-mails capabilities to the class that consumes it.
@@ -29,6 +33,16 @@ It's requirements are either the class that consumes the role is Backup::Email::
 =item * password()
 
 =back
+
+=head1 attachFile($path)
+
+Adds a given existing file to the list of files which will be attached to the e-mail
+
+=head1 sendEmail($href)
+
+$href is HashRef which contains 2 keys: subject,body.
+It must be filled if you want to have those two attributes for the e-mail you are sending.
+Also , here , the list of files are checked and attached to the e-mail message.
 
 =head1 TODO
 
@@ -131,4 +145,4 @@ sub sendEmail {
 @MIME::Lite::SMTP::TLS::ISA = qw( Net::SMTP::TLS );
 sub MIME::Lite::SMTP::TLS::print { shift->datasend(@_) }
 
-1;
+1;

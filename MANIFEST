@@ -1,14 +1,18 @@
 Changes
-Makefile.PL
+LICENSE
 MANIFEST
+META.yml
+Makefile.PL
 README
 app.pl
-t/Backup-Email-Send.t
-t/Backup-Email-Config.t
-t/config.yml
+dist.ini
 lib/Backup/Email.pm
-lib/Backup/Zip.pm
+lib/Backup/Email/Config.pm
 lib/Backup/Email/GUI.pm
 lib/Backup/Email/Send.pm
-lib/Backup/Email/Config.pm
-META.yml                                 Module meta-data (added by MakeMaker)
+lib/Backup/Zip.pm
+t/Backup-Email-Config.t
+t/Backup-Email-Send.t
+t/config.yml
+t/release-pod-coverage.t
+t/release-pod-syntax.t

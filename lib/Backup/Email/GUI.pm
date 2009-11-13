@@ -24,6 +24,10 @@ extends 'Wx::App';
 
 Backup::Email::GUI - This is a GUI written using the Wx bindings for Backup::Email.
 
+=head1 VERSION
+
+version 0.02
+
 =head1 SCREENSHOT
 
 =begin html
@@ -243,7 +247,8 @@ sub OnInit {
 
 			$self->map_multiple(
 				sub {
-					$self->list->SetItem($entry_id,$_[0],$_[1]);
+                                    #local($_[0]);
+                                    $self->list->SetItem($entry_id,$_[0],$_[1]);
 				},
 				[0..3],
 				["$uid",$from,$subject,$date]
@@ -263,4 +268,4 @@ sub OnInit {
 
 
 
-1;
+1;

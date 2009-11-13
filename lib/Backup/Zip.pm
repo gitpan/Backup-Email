@@ -18,6 +18,10 @@ requires 'files_to_zip';
 Backup::Zip - A Zip Role for classes using Moose
 
 
+=head1 VERSION
+
+version 0.02
+
 =head1 SYNOPSIS
 
         package CanZipThings;
@@ -90,4 +94,4 @@ sub make_zip {
 	}
 }
 
-1;
+1;

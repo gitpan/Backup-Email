@@ -46,7 +46,12 @@ our $VERSION = '0.015';
 
 Backup::Email - A backup application specifically built for backing up files to an IMAP server.
 
+=head1 VERSION
+
+version 0.02
+
 =head1 DESCRIPTION
+
 
 This module coupled with Backup::Email::GUI is intended to help you backup configuration
 files on your system( as well as other files that you want to specify in the configuration YAML file ).
@@ -57,6 +62,7 @@ It inherits Backup::Email::Config so it can access easily the config.yml that yo
 
 It caches some e-mail headers in messages.db using DBM::Deep so it will run faster on sub-sequent runs.
 
+(Normally you should use something like revision control or just ftp but this is probably )
 
 =head1 SYNOPSIS
 
@@ -299,4 +305,3 @@ L<Backup::Email::GUI> , L<Backup::Email::Config> , L<Backup::Zip> , L<Backup::Em
 =cut
 
 1;
-

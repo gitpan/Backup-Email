@@ -1,5 +1,8 @@
 Revision history for Perl extension Backup::Email.
 
+0.02   Fri Nov 13 19:00:00 2009
+        - Added some more tests to Backup::Email::Config and g(). 
+        - Moved to Dist::Zilla for building the distribution ( not sure I'm supposed to write this as a change...)
 
 0.015  Wed Oct  7 18:29:00 2009
         - added support in Backup::Email::Send role for attaching multiple files to an email
