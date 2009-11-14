@@ -1,3 +1,13 @@
+# 
+# This file is part of Backup-Email
+# 
+# This software is copyright (c) 2009 by Stefan Petrea.
+# 
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+# 
+use strict;
+use warnings;
 package Backup::Email::Config;
 #this package will be used to refactor the use of the configuration file
 #use Want;
@@ -22,7 +32,7 @@ Backup::Email::Config - A module that maps naturally keys a YAML file over metho
 
 =head1 VERSION
 
-version 0.02
+version 0.021
 
 =head1 DESCRIPTION
 

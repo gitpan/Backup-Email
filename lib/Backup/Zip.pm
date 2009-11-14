@@ -1,3 +1,13 @@
+# 
+# This file is part of Backup-Email
+# 
+# This software is copyright (c) 2009 by Stefan Petrea.
+# 
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+# 
+use strict;
+use warnings;
 package Backup::Zip;
 use Moose::Role;
 use Archive::Zip qw/:ERROR_CODES :CONSTANTS/;
@@ -20,7 +30,7 @@ Backup::Zip - A Zip Role for classes using Moose
 
 =head1 VERSION
 
-version 0.02
+version 0.021
 
 =head1 SYNOPSIS
 

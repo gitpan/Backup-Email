@@ -1,3 +1,13 @@
+# 
+# This file is part of Backup-Email
+# 
+# This software is copyright (c) 2009 by Stefan Petrea.
+# 
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+# 
+use strict;
+use warnings;
 # Every program attempts to expand until it can read mail. Those programs which cannot so expand are replaced by ones which can. -> jwz
 package Backup::Email;
 use strict;
@@ -48,7 +58,7 @@ Backup::Email - A backup application specifically built for backing up files to 
 
 =head1 VERSION
 
-version 0.02
+version 0.021
 
 =head1 DESCRIPTION
 

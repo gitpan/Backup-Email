@@ -26,4 +26,5 @@ requires:
   Net::SSLeay: 0
   Wx: 0
   YAML: 0
-version: 0.02
+  perl: 5.010000
+version: 0.021

@@ -1,3 +1,13 @@
+# 
+# This file is part of Backup-Email
+# 
+# This software is copyright (c) 2009 by Stefan Petrea.
+# 
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+# 
+use strict;
+use warnings;
 package Backup::Email::GUI;
 use strict;
 use warnings;
@@ -26,7 +36,7 @@ Backup::Email::GUI - This is a GUI written using the Wx bindings for Backup::Ema
 
 =head1 VERSION
 
-version 0.02
+version 0.021
 
 =head1 SCREENSHOT
 

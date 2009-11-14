@@ -11,7 +11,7 @@ sub test_method {
 }
 
 package main;
-use feature 'say';
+#use feature 'say';
 use Test::More qw/no_plan/;
 use Data::Dumper;
 use lib './lib';

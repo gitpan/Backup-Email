@@ -11,6 +11,7 @@ lib/Backup/Email/Config.pm
 lib/Backup/Email/GUI.pm
 lib/Backup/Email/Send.pm
 lib/Backup/Zip.pm
+messages.db
 t/Backup-Email-Config.t
 t/Backup-Email-Send.t
 t/config.yml
