@@ -14,7 +14,7 @@ use warnings;
 use Moose;
 use MooseX::NonMoose; # for inheriting from Non-Moose classes
 use Backup::Email;
-use feature 'say';
+#use feature 'say';
 use Data::Dumper;
 use DateTime;
 use Archive::Zip;
@@ -36,7 +36,7 @@ Backup::Email::GUI - This is a GUI written using the Wx bindings for Backup::Ema
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 SCREENSHOT
 
@@ -103,7 +103,7 @@ has frame => (
 	is	=> 'rw',
 	lazy	=> 1,
 	default	=> sub {
-		say "frame created";
+		print "frame created\n";
 		return Wx::Frame->new( undef,         # Parent window
 			-1,            # Window id
 			'Email Backup', # Title
@@ -132,7 +132,7 @@ has list => (
 
 sub RESTORE {
 	my $self = shift;
-	say "RESTORE pressed";
+	print "RESTORE pressed\n";
 	#say Dumper $self->GetSelectedItem;
 	my $selected = $self->GetSelectedItem;
 	if( defined $selected ) {
@@ -155,7 +155,7 @@ sub BACKUP {
         confess "[ERROR] You need a ID in your configuration YAML file" unless $self->backup->ID;
         my $zipfile = 'configs.zip';
         `rm $zipfile`;
-        say Dumper $self->backup->files_to_zip();
+        print Dumper $self->backup->files_to_zip()."\n";
         $self->backup->make_zip($zipfile);
 
         $self->backup->attachFile($zipfile);
@@ -164,7 +164,7 @@ sub BACKUP {
                     'backup '.$self->backup->ID.' '.DateTime->now.' OS='.$^O.' [configuration]' ,
                 body    => join("\n",$self->backup->files_to_zip()),
         });
-	say "BACKUP pressed";
+	print "BACKUP pressed\n";
 }
 
 
@@ -233,7 +233,6 @@ sub OnInit {
 
 
 
-	say "here";
 
 	$self->backup->check_folder('INBOX',
 		sub {

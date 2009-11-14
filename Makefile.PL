@@ -9,7 +9,7 @@ WriteMakefile(
   NAME      => 'Backup::Email',
   AUTHOR    => "Stefan\ Petrea\ \<stefan\.petrea\@gmail\.com\>",
   ABSTRACT  => "A\ backup\ application\ specifically\ built\ for\ backing\ up\ files\ to\ an\ IMAP\ server\.",
-  VERSION   => '0.021',
+  VERSION   => '0.022',
   EXE_FILES => [ qw() ],
   (eval { ExtUtils::MakeMaker->VERSION(6.31) } ? (LICENSE => 'perl') : ()),
   PREREQ_PM    => {

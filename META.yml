@@ -27,4 +27,4 @@ requires:
   Wx: 0
   YAML: 0
   perl: 5.010000
-version: 0.021
+version: 0.022

@@ -23,7 +23,7 @@ Backup::Email::Send - A role for sending e-mails.
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 DESCRIPTION
 

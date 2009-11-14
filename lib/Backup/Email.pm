@@ -13,7 +13,6 @@ package Backup::Email;
 use strict;
 use warnings;
 use Moose;
-use feature 'say';
 use Mail::IMAPClient;
 use Mail::IMAPClient::BodyStructure;
 use IO::Socket::SSL;
@@ -58,7 +57,7 @@ Backup::Email - A backup application specifically built for backing up files to 
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 DESCRIPTION
 
@@ -177,9 +176,9 @@ sub check_if_connected {
 	my ($self) = @_;
 
 	if($self->client->IsAuthenticated() ){
-		say "Authenticated \n";
+		print "Authenticated \n";
 	} else {
-		say "Authentication failed \n";
+		print "Authentication failed \n";
 		exit(-1);
 	};
         #my @folders = $self->client->folders();
@@ -207,7 +206,7 @@ sub check_folder {
         # processing fresh uids
 
 
-        say "FIRST:".$uids[0];
+        print "FIRST:".$uids[0]."\n";
         if( !defined($self->last_message_read) || $uids[-1] > int($self->last_message_read) ) {
             for my $uid ( @uids ) {
                 my $hashref = $self->client->parse_headers($uid,"Date","Subject","From");
@@ -231,13 +230,13 @@ sub check_folder {
         };
         $self->last_message_read->change($last_uid) if $last_uid;
 
-        say "!!!starting to use cache";
+        print "!!!starting to use cache\n";
         # processing the cache
         if( $not_first_time ) {
             for my $i ( 0..$db->length() ) {
                 my $hashref = $db->get($i);
                 next if ($last_uid && $hashref->{uid}+1 > $last_uid );
-                say "UID=".$hashref->{uid};
+                print "UID=".$hashref->{uid}."\n";
                 $code->( $self, \$hashref, $hashref->{uid} );
             }
         }
@@ -246,7 +245,7 @@ sub check_folder {
 
 sub getMessageFile {
 	my ($self,$uid) = @_;
-	say "in getMessage";
+	print "in getMessage\n";
 
 	my $struct = Mail::IMAPClient::BodyStructure->new( 
 		$self->client->fetch($uid, "bodystructure")
@@ -268,7 +267,7 @@ sub getMessageFile {
             #TODO -> try on windows to use  binmode FILEHANDLE nad this should fix it and eliminate the need for base64.exe
             system "base64 -d -n config.base64 > config.zip"; # this is not needed on Linux , where base64 from MIME::Base64 works properly
         } elsif ( $^O =~ /linux/ ) {
-            say "I'm on linux";
+            print "I'm on linux\n";
 	    open my $config_archive , ">config.zip";
             print $config_archive decode_base64( $self->client->bodypart_string($uid,2) );
         };

@@ -30,7 +30,7 @@ Backup::Zip - A Zip Role for classes using Moose
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 SYNOPSIS
 

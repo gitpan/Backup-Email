@@ -18,7 +18,7 @@ use YAML qw/LoadFile DumpFile/;
 use Data::Dumper;
 use Carp qw/confess/;
 #use MooseX::Types::Moose qw/HashRef Str/;
-use feature 'say';
+#use feature 'say';
 use overload 
 	'@{}'	=> \&arrayify,
 	'""'	=> \&stringify;
@@ -32,7 +32,7 @@ Backup::Email::Config - A module that maps naturally keys a YAML file over metho
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 DESCRIPTION
 
@@ -274,8 +274,8 @@ sub stringify {
 
 sub debug {
 	my ($self) = @_;
-	say "last_config_item	: ".$self->last_config_item;
-	say "temp_change	: ".$self->temp_change;
+	print "last_config_item	: ".$self->last_config_item."\n";
+	print "temp_change	: ".$self->temp_change."\n";
 }
 
 sub change { # append this to the end of the chain to modify and save the conf file
